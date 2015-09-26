@@ -20,11 +20,6 @@ public class DefaultClientTest extends AbstractTest {
     @Test
     public void testExecuteMethod() throws Exception {
         try {
-            RestApiMethod method = new RestApiMethod("sync-case", RestApiMethod.Type.GET);
-            method.putParam("device_id", DEVICE_ID);
-            method.putParam("case", "all");
-            RestApiResponse response = client.executeMethod(method);
-            Assert.assertTrue(response != null);
         } catch (Exception e) {
             Assert.fail(e.getMessage());
         }
