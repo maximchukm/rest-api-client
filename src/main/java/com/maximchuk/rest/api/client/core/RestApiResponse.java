@@ -1,5 +1,8 @@
 package com.maximchuk.rest.api.client.core;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -77,6 +80,14 @@ public class RestApiResponse {
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public JSONObject getJSONObject() {
+        return new JSONObject(getString());
+    }
+
+    public JSONArray getJSONArray() {
+        return new JSONArray(getString());
     }
 
     public FileEntity getFileEntity() {

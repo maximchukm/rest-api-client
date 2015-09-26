@@ -1,4 +1,6 @@
-package com.maximchuk.rest.api.client.core;
+package com.maximchuk.rest.api.client.content;
+
+import com.maximchuk.rest.api.client.core.FileEntity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -10,7 +12,7 @@ import java.util.UUID;
  * @author Maxim Maximchuk
  *         date 25-Sep-15.
  */
-public class MultipartFormDataRestApiContent extends RestApiContent {
+public class MultipartFormDataRestApiContent implements RestApiContent {
 
     private String boundary;
     private List<Part> parts = new ArrayList<Part>();
@@ -21,7 +23,7 @@ public class MultipartFormDataRestApiContent extends RestApiContent {
         return instance;
     }
 
-    public MultipartFormDataRestApiContent addPart(String name, RestApiContent content) {
+    public MultipartFormDataRestApiContent addPart(String name, DefaultRestApiContent content) {
         parts.add(new Part(name, content.getContentType(), content.getBytes()));
         return this;
     }

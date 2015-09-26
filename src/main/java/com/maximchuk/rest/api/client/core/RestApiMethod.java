@@ -1,8 +1,12 @@
 package com.maximchuk.rest.api.client.core;
 
+import com.maximchuk.rest.api.client.content.RestApiContent;
+import com.maximchuk.rest.api.client.http.HttpHeader;
 import com.maximchuk.rest.api.client.util.StringParamBuilder;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,11 +15,9 @@ import java.util.Map;
  */
 public final class RestApiMethod {
 
-    private static final String ENCODING = "UTF-8";
-
     protected Type type;
     protected String name;
-    protected Map<String, String> headers = new HashMap<String, String>();
+    protected List<HttpHeader> headers = new ArrayList<HttpHeader>();
     protected boolean forceQueryParams = false;
     protected RestApiContent content;
 
@@ -39,8 +41,8 @@ public final class RestApiMethod {
         this.timeout = timeoutMillis;
     }
 
-    public void addHeader(String name, String value) {
-        headers.put(name, value);
+    public void addHeader(HttpHeader header) {
+        headers.add(header);
     }
 
     public void forceQueryParams(boolean force) {

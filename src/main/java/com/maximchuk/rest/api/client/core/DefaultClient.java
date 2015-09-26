@@ -1,12 +1,13 @@
 package com.maximchuk.rest.api.client.core;
 
+import com.maximchuk.rest.api.client.auth.Credentials;
 import com.maximchuk.rest.api.client.http.HttpException;
+import com.maximchuk.rest.api.client.http.HttpHeader;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Map;
 
 /**
  * @author Maxim Maximchuk
@@ -16,13 +17,18 @@ public class DefaultClient {
 
     private String serverUrl;
     private String controllerName;
+    private Credentials credentials;
 
     public DefaultClient(String serverUrl, String controllerName) {
         this.serverUrl = serverUrl;
         this.controllerName = controllerName;
     }
 
-    public RestApiResponse executeMethod(RestApiMethod method) throws IOException, HttpException {
+    public void setCredentials(Credentials credentials) {
+        this.credentials = credentials;
+    }
+
+    public RestApiResponse execute(RestApiMethod method) throws IOException, HttpException {
         StringBuilder urlBuilder = new StringBuilder(serverUrl);
         if (controllerName != null) {
             urlBuilder.append("/").append(controllerName);
@@ -38,8 +44,11 @@ public class DefaultClient {
         try {
             connection.setRequestMethod(method.type.name());
             connection.setConnectTimeout(method.timeout);
-            for (Map.Entry<String, String> header : method.headers.entrySet()) {
-                connection.setRequestProperty(header.getKey(), header.getValue());
+            if (credentials != null) {
+                connection.setRequestProperty("Authorization", credentials.getAuthorizationString());
+            }
+            for (HttpHeader header : method.headers) {
+                connection.setRequestProperty(header.getName(), header.getValue());
             }
             if (method.content != null) {
                 connection.setRequestProperty("Content-Type", method.content.getContentType());
