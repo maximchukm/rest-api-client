@@ -8,8 +8,8 @@ public class BasicHttpAuthCredential implements Credentials {
 
     private String authString;
 
-    public BasicHttpAuthCredential(String username, String password, Base64 base64) {
-        authString = base64.encode(username + ":" + password);
+    public BasicHttpAuthCredential(String username, String password, Base64Encoder base64encoder) {
+        authString = base64encoder.encode(username + ":" + password);
     }
 
     @Override
