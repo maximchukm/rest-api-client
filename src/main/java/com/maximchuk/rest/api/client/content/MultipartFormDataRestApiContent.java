@@ -23,7 +23,7 @@ public class MultipartFormDataRestApiContent implements RestApiContent {
         return instance;
     }
 
-    public MultipartFormDataRestApiContent addPart(String name, DefaultRestApiContent content) {
+    public MultipartFormDataRestApiContent addPart(String name, RestApiContent content) {
         parts.add(new Part(name, content.getContentType(), content.getBytes()));
         return this;
     }
