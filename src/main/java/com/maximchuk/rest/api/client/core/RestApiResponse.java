@@ -29,7 +29,8 @@ public class RestApiResponse {
         try {
             this.statusCode = connection.getResponseCode();
         } catch (IOException e) { // android hook for 401
-            if (e.getMessage().equals(ANDROID_401_MESSAGE) || e.getMessage().equals(ANDROID_NULL_TOKEN)) {
+            if (e.getMessage() != null
+                    && (e.getMessage().equals(ANDROID_401_MESSAGE) || e.getMessage().equals(ANDROID_NULL_TOKEN))) {
                 statusCode = 401;
                 return;
             } else {
