@@ -6,7 +6,7 @@ package com.maximchuk.rest.api.client.core;
  */
 public abstract class AbstractTest {
 
-    protected static final String SERVER_URL = "http://jsonplaceholder.typicode.com";
-    protected static final String CONTROLLER_NAME = "posts";
+    protected static final String SERVER_URL = "https://httpbin.org";
+    protected static final String CONTROLLER_NAME = "";
 
 }

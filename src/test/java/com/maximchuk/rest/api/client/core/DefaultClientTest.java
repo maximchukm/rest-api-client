@@ -23,24 +23,23 @@ public class DefaultClientTest extends AbstractTest {
     @Test
     public void testExecuteMethod() throws Exception {
         try {
-            RestApiMethod method = new RestApiMethod(RestApiMethod.Type.GET);
+            RestApiMethod method = new RestApiMethod("get", RestApiMethod.Type.GET);
             RestApiResponse response = client.execute(method);
             assertNotNull(response);
-            assertTrue(response.getJSONArray().length() > 0);
 
             JSONObject json = new JSONObject();
             json.put("testCase", "testExecuteMethod");
             json.put("message", "Hello!");
 
-            method = new RestApiMethod(RestApiMethod.Type.POST);
+            method = new RestApiMethod("post", RestApiMethod.Type.POST);
             method.setContent(JsonRestApiContent.create(json));
             response = client.execute(method);
+            assertEquals(response.getContentType(), "application/json");
             System.out.println(response.getString());
             assertNotNull(response);
 
             JSONObject respJson = response.getJSONObject();
-            respJson.remove("id");
-            assertEquals(json.toString(), respJson.toString());
+            assertEquals(json.toString(), respJson.getJSONObject("json").toString());
         } catch (Exception e) {
             fail(e.getMessage());
         }

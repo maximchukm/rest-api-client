@@ -22,12 +22,14 @@ public class RestApiResponse {
     public static final String ANDROID_NULL_TOKEN = "Received authentication challenge is null";
 
     private int statusCode;
+    private String contentType;
     private byte[] content;
     private FileEntity fileEntity;
 
     public RestApiResponse(HttpURLConnection connection) throws IOException {
         try {
             this.statusCode = connection.getResponseCode();
+            this.contentType = connection.getContentType();
         } catch (IOException e) { // android hook for 401
             if (e.getMessage() != null
                     && (e.getMessage().equals(ANDROID_401_MESSAGE) || e.getMessage().equals(ANDROID_NULL_TOKEN))) {
@@ -69,6 +71,10 @@ public class RestApiResponse {
 
     public int getStatusCode() {
         return statusCode;
+    }
+
+    public String getContentType() {
+        return contentType;
     }
 
     public byte[] getBytes() {
