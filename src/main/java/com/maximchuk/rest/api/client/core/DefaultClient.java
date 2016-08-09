@@ -52,7 +52,6 @@ public class DefaultClient {
             }
             if (method.content != null) {
                 connection.setRequestProperty("Content-Type", method.content.getContentType());
-                connection.addRequestProperty("Content-Length", String.valueOf(method.content.getBytes().length));
                 writeRequest(connection, method.content.getBytes());
             } else if (!method.forceQueryParams) {
                 writeRequest(connection, method.paramString().getBytes());
