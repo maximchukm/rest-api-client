@@ -17,14 +17,16 @@ public class DefaultRestApiContent implements RestApiContent {
         this.bytes = content;
     }
 
-    public static DefaultRestApiContent create(String contentType, byte[] content) {
+    public static RestApiContent create(String contentType, byte[] content) {
         return new DefaultRestApiContent(contentType, content);
     }
 
+    @Override
     public String getContentType() {
         return contentType;
     }
 
+    @Override
     public byte[] getBytes() {
         return bytes;
     }

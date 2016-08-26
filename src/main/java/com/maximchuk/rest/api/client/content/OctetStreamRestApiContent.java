@@ -6,7 +6,7 @@ package com.maximchuk.rest.api.client.content;
  */
 public class OctetStreamRestApiContent extends DefaultRestApiContent {
 
-    public static DefaultRestApiContent create(byte[] content) {
+    public static RestApiContent create(byte[] content) {
         return create("application/octet-stream", content);
     }
 

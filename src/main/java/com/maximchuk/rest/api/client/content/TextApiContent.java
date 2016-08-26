@@ -6,7 +6,7 @@ package com.maximchuk.rest.api.client.content;
  */
 public class TextApiContent extends DefaultRestApiContent {
 
-    public static DefaultRestApiContent create(String text) {
+    public static RestApiContent create(String text) {
         return create("text/plain", text.getBytes());
     }
 

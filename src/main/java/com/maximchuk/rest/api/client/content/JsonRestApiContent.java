@@ -9,16 +9,18 @@ import org.json.JSONObject;
  */
 public class JsonRestApiContent extends DefaultRestApiContent {
 
-    public static DefaultRestApiContent create(JSONObject json) {
-        return create("application/json", json.toString().getBytes());
+    private static final String CONTENT_TYPE = "application/json";
+
+    public static RestApiContent create(JSONObject json) {
+        return create(CONTENT_TYPE, json.toString().getBytes());
     }
 
-    public static DefaultRestApiContent create(JSONArray json) {
-        return create("application/json", json.toString().getBytes());
+    public static RestApiContent create(JSONArray json) {
+        return create(CONTENT_TYPE, json.toString().getBytes());
     }
 
-    public static DefaultRestApiContent create(String jsonString) {
-        return create("application/json", jsonString.getBytes());
+    public static RestApiContent create(String jsonString) {
+        return create(CONTENT_TYPE, jsonString.getBytes());
     }
 
 }
