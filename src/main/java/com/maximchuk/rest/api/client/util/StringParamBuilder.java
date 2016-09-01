@@ -1,5 +1,7 @@
 package com.maximchuk.rest.api.client.util;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,12 +28,21 @@ public class StringParamBuilder {
     public String build() {
         StringBuilder paramBuilder = new StringBuilder();
         for (Map.Entry<String, Object> param: params.entrySet()) {
-            paramBuilder.append(param.getKey()).append("=").append(param.getValue()).append("&");
+            paramBuilder.append(urlEncode(param.getKey())).append("=").append(urlEncode(param.getValue().toString()))
+                    .append("&");
         }
         if (paramBuilder.length() > 0) {
             paramBuilder.deleteCharAt(paramBuilder.length() - 1);
         }
         return paramBuilder.toString();
+    }
+
+    private String urlEncode(String s) {
+        try {
+            return URLEncoder.encode(s, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
