@@ -15,6 +15,15 @@ public class HttpException extends Exception {
         this.errorCode = restApiResponse.getStatusCode();
     }
 
+    public HttpException(String message, int errorCode) {
+        super(message);
+        this.errorCode = errorCode;
+    }
+
+    public HttpException(int errorCode) {
+        this.errorCode = errorCode;
+    }
+
     public int getErrorCode() {
         return errorCode;
     }
