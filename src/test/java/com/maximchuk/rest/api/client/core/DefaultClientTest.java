@@ -34,9 +34,9 @@ public class DefaultClientTest extends AbstractTest {
             method = new RestApiMethod("post", RestApiMethod.Type.POST);
             method.setContent(JsonRestApiContent.create(json));
             response = client.execute(method);
+            assertNotNull(response);
             assertEquals(response.getContentType(), "application/json");
             System.out.println(response.getString());
-            assertNotNull(response);
 
             JSONObject respJson = response.getJSONObject();
             assertEquals(json.toString(), respJson.getJSONObject("json").toString());
